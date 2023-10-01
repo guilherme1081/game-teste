@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b1sokx0vu232p"]
+[gd_scene load_steps=34 format=3 uid="uid://b1sokx0vu232p"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_eunds"]
 [ext_resource type="Texture2D" uid="uid://dkioj7px3h30e" path="res://assets/player/Prototype_Worksheet.png" id="1_kt6qb"]
@@ -274,9 +274,105 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_7dn0e"]
+resource_name = "dash_down"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [38, 37, 38]
+}
+
+[sub_resource type="Animation" id="Animation_uxl28"]
+resource_name = "dash_left"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [40, 41, 42]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o7kwx"]
+resource_name = "dash_right"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [40, 41, 42]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7ys38"]
+resource_name = "dash_up"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [32, 33]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qerbb"]
 _data = {
 "RESET": SubResource("Animation_dq7jj"),
+"dash_down": SubResource("Animation_7dn0e"),
+"dash_left": SubResource("Animation_uxl28"),
+"dash_right": SubResource("Animation_o7kwx"),
+"dash_up": SubResource("Animation_7ys38"),
 "idle_front": SubResource("Animation_5qmpb"),
 "idle_left": SubResource("Animation_hv6ya"),
 "idle_right": SubResource("Animation_iot7i"),
@@ -286,6 +382,29 @@ _data = {
 "run_right": SubResource("Animation_jybd5"),
 "run_up": SubResource("Animation_vrmhb")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pxlr"]
+animation = &"dash_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0s4vx"]
+animation = &"dash_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yxc7a"]
+animation = &"dash_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1yj1f"]
+animation = &"dash_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_1x0gn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5pxlr")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_0s4vx")
+blend_point_1/pos = Vector2(0, -0.9)
+blend_point_2/node = SubResource("AnimationNodeAnimation_yxc7a")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_1yj1f")
+blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwe3t"]
 animation = &"idle_front"
@@ -334,6 +453,8 @@ blend_point_3/pos = Vector2(1, 0)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vvik7"]
+states/dash/node = SubResource("AnimationNodeBlendSpace2D_1x0gn")
+states/dash/position = Vector2(405, 113)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_0t4ye")
 states/idle/position = Vector2(606, 41)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_jqyct")
@@ -361,8 +482,15 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_vvik7")
 anim_player = NodePath("../Animation")
 active = true
+parameters/dash/blend_position = Vector2(-0.00359452, 0.989362)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ygqg8")
+debug_color = Color(0.0941176, 0.572549, 0.815686, 0)
+
+[node name="dash_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
