@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 @onready var sprite = $"AnimatedSprite2D"
+@onready var dash_cd = $"dash_cooldown"
+
 
 # Variáveis de movimento
 const base_moviment_speed: int = 120
 var moviment_speed: int = 120
-
-
 var last_direction = 1 # 1: left, 2: right, 3: front, 4: back
 var idle_anim = {
 	1: 'idle_left',
@@ -18,29 +18,23 @@ var idle_anim = {
 # Variáveis de dash
 const dash_cooldown: float = 3 # Em segundos
 const dash_multiplier: float = 5
-var dash_timer: float = dash_cooldown
-var has_dash: int  = 0
 var dash_duration: float = 0
-
+var has_dash = 0
+var dash_amount = 2
 # Processos
 func _process(delta):
-	if dash_timer <= 0:
-		has_dash = 1
-	else:
-		dash_timer -= delta
-		
 	if dash_duration > 0:
 		dash_duration -= delta
-
+	
 func _physics_process(delta):
 	moviment()
 
 # métodos
 func moviment():
 	""""Função responsável por toda a movimentação do player"""
+	
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
-	var dash_pressed = Input.get_action_strength("dash")
 	# Avalia a direção em que o personagem está
 	# E roda a animação equivalente.
 	# A animação para right e left é a mesma, basta usar um flip_h 
@@ -64,17 +58,23 @@ func moviment():
 		sprite.play(idle_anim[last_direction])
 	
 	if Input.is_action_pressed("dash"):
-		if has_dash:
-			has_dash = 0
-			dash_timer = dash_cooldown
-			dash_duration = 0.5
-	
+		if dash_amount and not dash_duration > 0:
+			dash_cd.start(dash_cooldown)
+			dash_amount -= 1
+			dash_duration = 0.8
+			print("dash!!! dash!!!")
+			
 	if dash_duration > 0:
-		sprite.play('dash_left')
-	velocity = Vector2(x_mov, y_mov).normalized()*moviment_speed + Vector2(x_mov, y_mov).normalized()*base_moviment_speed*dash_duration*dash_multiplier
+		sprite.play("dash_left")
+		
+		
+		
+			
+
+	move_and_slide()
 	
 
-		
-	
-	move_and_slide()
-	print(dash_duration)
+func _on_dash_cooldown_timeout():
+	if dash_amount < 2:
+		dash_amount += 1
+
