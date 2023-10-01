@@ -1,13 +1,13 @@
 [gd_scene load_steps=31 format=3 uid="uid://713f1b5ik0e1"]
 
-[ext_resource type="Texture2D" uid="uid://bdn237tigrbl" path="res://assets/mapa/TX Tileset Grass.png" id="1_xt2o1"]
-[ext_resource type="Texture2D" uid="uid://djsoty36a5imy" path="res://assets/mapa/Solaria Demo Update 01.png" id="2_sivt2"]
-[ext_resource type="Texture2D" uid="uid://df644mlmoskh7" path="res://assets/mapa/TX Tileset Stone Ground.png" id="3_7tb15"]
+[ext_resource type="Texture2D" uid="uid://bdn237tigrbl" path="res://assets/TX Tileset Grass.png" id="1_xt2o1"]
+[ext_resource type="Texture2D" uid="uid://djsoty36a5imy" path="res://assets/Solaria Demo Update 01.png" id="2_sivt2"]
+[ext_resource type="Texture2D" uid="uid://df644mlmoskh7" path="res://assets/TX Tileset Stone Ground.png" id="3_7tb15"]
 [ext_resource type="Texture2D" uid="uid://dy2ruux6iypg" path="res://assets/novo bicho.png" id="3_j1qjf"]
-[ext_resource type="Texture2D" uid="uid://chl3xly4b2tci" path="res://assets/mapa/TX Tileset Wall.png" id="4_pddtd"]
-[ext_resource type="Texture2D" uid="uid://c4g82pf30owr4" path="res://assets/mapa/TX Plant.png" id="5_e61ur"]
-[ext_resource type="Texture2D" uid="uid://daq3t3qx6um8h" path="res://assets/mapa/TX Props.png" id="6_2xmqw"]
-[ext_resource type="Texture2D" uid="uid://lrpeqgy74ra7" path="res://assets/mapa/TX Shadow Plant.png" id="7_puxlj"]
+[ext_resource type="Texture2D" uid="uid://chl3xly4b2tci" path="res://assets/TX Tileset Wall.png" id="4_pddtd"]
+[ext_resource type="Texture2D" uid="uid://c4g82pf30owr4" path="res://assets/TX Plant.png" id="5_e61ur"]
+[ext_resource type="Texture2D" uid="uid://daq3t3qx6um8h" path="res://assets/TX Props.png" id="6_2xmqw"]
+[ext_resource type="Texture2D" uid="uid://lrpeqgy74ra7" path="res://assets/TX Shadow Plant.png" id="7_puxlj"]
 [ext_resource type="Texture2D" uid="uid://d0g8r52b5pplw" path="res://assets/mapa/Grassland Tileset.png" id="8_gxc75"]
 [ext_resource type="PackedScene" uid="uid://b1sokx0vu232p" path="res://player/player.tscn" id="9_t2re6"]
 
@@ -4864,7 +4864,6 @@ layer_0/tile_data = PackedInt32Array(-3014668, 1441792, 10, -2949132, 1441792, 1
 [node name="player" parent="." instance=ExtResource("9_t2re6")]
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(3, 3)
 
 [node name="Sprite2D" type="StaticBody2D" parent="."]
 position = Vector2(-82, 50)

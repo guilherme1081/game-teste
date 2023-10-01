@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var sprite = $"AnimatedSprite2D"
 @onready var dash_cd = $"dash_cooldown"
 
+@export var Bullet : PackedScene
 
 # Variáveis de movimento
 const base_moviment_speed: int = 80
@@ -30,12 +31,17 @@ var dash_duration: float = 0
 var has_dash = 0
 var dash_amount = 2
 # Processos
+
 func _process(delta):
 	if dash_duration > 0:
 		dash_duration -= delta
 	
 func _physics_process(delta):
 	moviment()
+	
+	if Input.is_action_pressed("attack"):
+		print("YEahhh")
+		shoot()
 
 # métodos
 func moviment():
@@ -79,11 +85,15 @@ func moviment():
 		sprite.play(dash_anim[last_direction])
 		velocity += velocity.normalized() * base_moviment_speed * dash_duration * dash_multiplier
 		
-		
 	move_and_slide()
-	
 
+func shoot():
+	print("Shooot!!!")
+	var b = Bullet.instantiate()
+	add_child(b)
+	b.transform = $Muzzle.global_transform
+
+	
 func _on_dash_cooldown_timeout():
 	if dash_amount < 2:
 		dash_amount += 1
-

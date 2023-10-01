@@ -1,7 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://b1sokx0vu232p"]
+[gd_scene load_steps=41 format=3 uid="uid://b1sokx0vu232p"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_eunds"]
 [ext_resource type="Texture2D" uid="uid://dkioj7px3h30e" path="res://assets/player/Prototype_Worksheet.png" id="1_kt6qb"]
+[ext_resource type="PackedScene" uid="uid://c0djtboftul1r" path="res://skills/bullet/bullet.tscn" id="2_8yalo"]
+[ext_resource type="PackedScene" uid="uid://xfu6kju24v5x" path="res://components/damage_component.tscn" id="3_36qqx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ll26y"]
 atlas = ExtResource("1_kt6qb")
@@ -294,6 +296,7 @@ size = Vector2(12, 18)
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_eunds")
+Bullet = ExtResource("2_8yalo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 99
@@ -309,6 +312,11 @@ shape = SubResource("RectangleShape2D_s6a6a")
 autostart = true
 
 [node name="dash_duration" type="Timer" parent="."]
+
+[node name="damageComponent" parent="." instance=ExtResource("3_36qqx")]
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(18, -15)
 
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="dash_duration" to="." method="_on_dash_duration_timeout"]
