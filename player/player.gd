@@ -10,6 +10,8 @@ var _state_machine
 @export_category("Objects")
 @export var _animation_tree: AnimationTree = null
 
+@export_category("Stats")
+@export var dash_amount: int = 3
 
 func _ready():
 	_state_machine = _animation_tree["parameters/playback"]

@@ -340,7 +340,7 @@ states/run/node = SubResource("AnimationNodeBlendSpace2D_jqyct")
 states/run/position = Vector2(588, 123)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5igp"]
-size = Vector2(10, 4.5)
+size = Vector2(11, 6.25)
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("_animation_tree")]
 script = ExtResource("1_eunds")
@@ -364,6 +364,5 @@ parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.25)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_h5igp")
-disabled = true
