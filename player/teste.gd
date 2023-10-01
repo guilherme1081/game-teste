@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 var moviment_speed: int = 200
 var direction = Vector2()
 
