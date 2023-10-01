@@ -1,19 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://b1sokx0vu232p"]
+[gd_scene load_steps=28 format=3 uid="uid://b1sokx0vu232p"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_eunds"]
 [ext_resource type="Texture2D" uid="uid://dkioj7px3h30e" path="res://assets/player/Prototype_Worksheet.png" id="1_kt6qb"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tuwhx"]
-atlas = ExtResource("1_kt6qb")
-region = Rect2(0, 320, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_suqq2"]
-atlas = ExtResource("1_kt6qb")
-region = Rect2(32, 320, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t88nm"]
-atlas = ExtResource("1_kt6qb")
-region = Rect2(64, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jalh4"]
 atlas = ExtResource("1_kt6qb")
@@ -113,20 +101,6 @@ region = Rect2(96, 128, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pjtg3"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tuwhx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_suqq2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t88nm")
-}],
-"loop": true,
-"name": &"dash_left",
-"speed": 6.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jalh4")
@@ -236,6 +210,6 @@ script = ExtResource("1_eunds")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(12, -17)
 sprite_frames = SubResource("SpriteFrames_pjtg3")
-animation = &"dash_left"
+animation = &"run_back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
