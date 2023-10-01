@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://coalneoai6mqf"]
+
+[sub_resource type="TileSet" id="TileSet_w5v6h"]
+
+[node name="world_test01" type="Node2D"]
+
+[node name="layer1" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_w5v6h")
+format = 2
